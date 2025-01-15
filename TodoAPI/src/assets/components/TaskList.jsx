@@ -55,8 +55,7 @@ export default function TaskList() {
             </span>
             {weather[task.city] && (
               <span>
-                Weather: {weather[task.city].main.temp}°C,{" "}
-                {weather[task.city].weather[0].description}
+                Weather: {weather.location}
               </span>
             )}
             <button
