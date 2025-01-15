@@ -85,6 +85,7 @@ export default function TaskList() {
             <span>
               {task.task} ({task.priority}){" "}
             </span>
+            {renderWeather(task.city)}
             <button
               onClick={() => dispatch(toggleTaskCompletion({ id: task.id }))}
             >
