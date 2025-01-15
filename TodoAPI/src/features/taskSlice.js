@@ -4,18 +4,22 @@ import axios from "axios";
 const API_KEY = "9eadbafef18e4b34840132841251501";
 const BASE_URL = "http://api.weatherapi.com/v1";
 
+// Load tasks from localStorage
+const loadTasksFromStorage = () => {
+  const savedTasks = localStorage.getItem('tasks');
+  return savedTasks ? JSON.parse(savedTasks) : [];
+};
+
 export const fetchWeather = createAsyncThunk(
   "task/fetchWeather",
   async (city) => {
-    console.log(city);
-    // changes axios.get() => axios.post(); URL = {http://api.weatherapi.com/v1/current.json?key=9eadbafef18e4b34840132841251501&q=Paris}
-    const response = await axios.post(`${BASE_URL}/current.json?key=${API_KEY}&q=${city}`);
-    return response.data;
+    const response = await axios.get(`${BASE_URL}/current.json?key=${API_KEY}&q=${city}`);
+    return { city, data: response.data };
   }
 );
 
 const initialState = {
-  tasks: [],
+  tasks: loadTasksFromStorage(),
   weather: {},
   status: "idle",
   error: null,
@@ -27,14 +31,17 @@ const taskSlice = createSlice({
   reducers: {
     addTask(state, action) {
       state.tasks.push({ ...action.payload, completed: false });
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
     deleteTask(state, action) {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
+      localStorage.setItem('tasks', JSON.stringify(state.tasks));
     },
     toggleTaskCompletion(state, action) {
       const task = state.tasks.find((task) => task.id === action.payload.id);
       if (task) {
         task.completed = !task.completed;
+        localStorage.setItem('tasks', JSON.stringify(state.tasks));
       }
     },
   },

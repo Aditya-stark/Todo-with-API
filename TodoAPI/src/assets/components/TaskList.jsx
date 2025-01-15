@@ -38,12 +38,21 @@ export default function TaskList() {
 
   useEffect(() => {
     pendingTasks.forEach((task) => {
-      dispatch(fetchWeather(task.city));
-      console.log('weather');
-      console.log(task);
+      if (task.city) {
+        dispatch(fetchWeather(task.city));
+      }
     });
-    // fetchWeather returns pendingTask as undefined
   }, [dispatch, pendingTasks]);
+
+  const renderWeather = (city) => {
+    const weatherData = weather[city];
+    if (!weatherData) return null;
+    return (
+      <span className="weather-info">
+        {weatherData.current.temp_c}°C - {weatherData.current.condition.text}
+      </span>
+    );
+  };
 
   return (
     <div className="task-list">
@@ -54,16 +63,10 @@ export default function TaskList() {
         pendingTasks.map((task) => (
           <div key={task.id} className="task-item">
             <span>
-              {task.task} ({task.priority}){" "}
+              {task.task} ({task.priority}) - {task.city}
             </span>
-            {weather[task.city] && (
-              <span>
-                Weather: {weather.location}
-              </span>
-            )}
-            <button
-              onClick={() => dispatch(toggleTaskCompletion({ id: task.id }))}
-            >
+            {renderWeather(task.city)}
+            <button onClick={() => dispatch(toggleTaskCompletion({ id: task.id }))}>
               Mark as Done
             </button>
             <button onClick={() => dispatch(deleteTask({ id: task.id }))}>
