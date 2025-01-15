@@ -1,19 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_KEY = "your_openweathermap_api_key";
-const BASE_URL = "https://api.openweathermap.org/data/2.5";
+const API_KEY = "9eadbafef18e4b34840132841251501";
+const BASE_URL = "http://api.weatherapi.com/v1";
 
 export const fetchWeather = createAsyncThunk(
   "task/fetchWeather",
   async (city) => {
-    const response = await axios.get(`${BASE_URL}/weather`, {
-      params: {
-        q: city,
-        appid: API_KEY,
-      },
-    });
-    return { city, data: response.data };
+    console.log(city);
+    // changes axios.get() => axios.post(); URL = {http://api.weatherapi.com/v1/current.json?key=9eadbafef18e4b34840132841251501&q=Paris}
+    const response = await axios.post(`${BASE_URL}/current.json?key=${API_KEY}&q=${city}`);
+    console.log(response.data.current);
+    return response.data.current;
   }
 );
 

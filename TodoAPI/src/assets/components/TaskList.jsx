@@ -40,6 +40,7 @@ export default function TaskList() {
     pendingTasks.forEach((task) => {
       dispatch(fetchWeather(task.city));
     });
+    // fetchWeather returns pendingTask as undefined
   }, [dispatch, pendingTasks]);
 
   return (
@@ -55,8 +56,7 @@ export default function TaskList() {
             </span>
             {weather[task.city] && (
               <span>
-                Weather: {weather[task.city].main.temp}°C,{" "}
-                {weather[task.city].weather[0].description}
+                Weather: {weather.location}
               </span>
             )}
             <button
