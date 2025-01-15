@@ -21,6 +21,7 @@ const loadTasksFromStorage = () => {
   return savedTasks ? JSON.parse(savedTasks) : [];
 };
 
+
 /**
  * Async thunk for fetching weather data
  * Makes API call to weatherapi.com and returns city-specific weather data
