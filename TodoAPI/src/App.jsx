@@ -1,16 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import store from "./store";
+import TaskInput from "./assets/components/taskInput";
+import TaskList from "./assets/components/TaskList";
+
+import "./App.css";
+import { Provider } from "react-redux";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div>
-      
-    </div>
-  )
+    <Provider store={store}>
+      <div className="App">
+        <h1>Todo List</h1>
+        <TaskInput />
+        <TaskList />
+      </div>
+    </Provider>
+  );
 }
 
-export default App
+export default App;
