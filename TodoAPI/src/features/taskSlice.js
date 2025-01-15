@@ -10,8 +10,7 @@ export const fetchWeather = createAsyncThunk(
     console.log(city);
     // changes axios.get() => axios.post(); URL = {http://api.weatherapi.com/v1/current.json?key=9eadbafef18e4b34840132841251501&q=Paris}
     const response = await axios.post(`${BASE_URL}/current.json?key=${API_KEY}&q=${city}`);
-    console.log(response.data.current);
-    return response.data.current;
+    return response.data;
   }
 );
 
