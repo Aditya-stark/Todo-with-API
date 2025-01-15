@@ -40,6 +40,7 @@ export default function TaskList() {
     pendingTasks.forEach((task) => {
       dispatch(fetchWeather(task.city));
     });
+    // fetchWeather returns pendingTask as undefined
   }, [dispatch, pendingTasks]);
 
   return (
