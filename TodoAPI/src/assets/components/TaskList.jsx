@@ -39,6 +39,8 @@ export default function TaskList() {
   useEffect(() => {
     pendingTasks.forEach((task) => {
       dispatch(fetchWeather(task.city));
+      console.log('weather');
+      console.log(task);
     });
     // fetchWeather returns pendingTask as undefined
   }, [dispatch, pendingTasks]);
