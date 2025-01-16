@@ -1,0 +1,12 @@
+/* Remove any conflicting styles and keep only necessary custom styles */
+.App {
+  @apply flex min-h-screen;
+}
+
+.main-content {
+  @apply flex-1;
+}
+
+.main-content.with-sidebar {
+  @apply ml-64;
+}

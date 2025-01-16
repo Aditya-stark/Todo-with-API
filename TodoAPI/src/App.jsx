@@ -7,6 +7,7 @@ import Login from "./assets/components/Login";
 import { logout } from "./features/authSlice";
 
 import "./App.css";
+import SideNav from "./assets/components/SideNav";
 
 function TodoApp() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -19,23 +20,26 @@ function TodoApp() {
 
   return (
     <div className="App">
-      <header>
-        <h1>Todo App</h1>
-        {isAuthenticated && (
-          <div className="user-info">
-            <span>Welcome, {user?.username}</span>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
+      {isAuthenticated && <SideNav />}
+      <div className={`main-content ${isAuthenticated ? "with-sidebar" : ""}`}>
+        <header>
+          <h1>Todo App</h1>
+          {isAuthenticated && (
+            <div className="user-info">
+              <span>Welcome, {user?.username}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+        </header>
+        {isAuthenticated ? (
+          <>
+            <TaskInput />
+            <TaskList />
+          </>
+        ) : (
+          <Login />
         )}
-      </header>
-      {isAuthenticated ? (
-        <>
-          <TaskInput />
-          <TaskList />
-        </>
-      ) : (
-        <Login />
-      )}
+      </div>
     </div>
   );
 }

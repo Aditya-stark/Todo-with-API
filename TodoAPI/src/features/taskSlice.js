@@ -61,7 +61,8 @@ const taskSlice = createSlice({
      * Adds a new task to the state and updates localStorage
      */
     addTask(state, action) {
-      state.tasks.push({ ...action.payload, completed: false });
+      const isImportant = action.payload.priority === "high";
+      state.tasks.push({ ...action.payload, completed: false, important: isImportant });
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     /**
@@ -78,6 +79,16 @@ const taskSlice = createSlice({
       const task = state.tasks.find((task) => task.id === action.payload.id);
       if (task) {
         task.completed = !task.completed;
+        localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      }
+    },
+    /**
+     * Updates the priority of a task and updates localStorage
+     */
+    updateTaskPriority(state, action) {
+      const task = state.tasks.find((task) => task.id === action.payload.id);
+      if (task) {
+        task.priority = action.payload.priority;
         localStorage.setItem("tasks", JSON.stringify(state.tasks));
       }
     },
@@ -101,5 +112,5 @@ const taskSlice = createSlice({
   },
 });
 
-export const { addTask, deleteTask, toggleTaskCompletion } = taskSlice.actions;
+export const { addTask, deleteTask, toggleTaskCompletion, updateTaskPriority } = taskSlice.actions;
 export default taskSlice.reducer;
