@@ -1,36 +1,37 @@
-import React from "react";
-import { Provider, useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { Provider, useSelector } from "react-redux";
 import store from "./store";
 import TaskInput from "./assets/components/taskInput";
 import TaskList from "./assets/components/TaskList";
 import Login from "./assets/components/Login";
-import { logout } from "./features/authSlice";
 
 import "./App.css";
 import SideNav from "./assets/components/SideNav";
+import Header from "./assets/components/Header";
 
 function TodoApp() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
+  const [isSideNavOpen, setIsSideNavOpen] = useState(false);
 
-  const handleLogout = () => {
-    dispatch(logout()); // This will handle all localStorage clearing
+  const toggleSideNav = () => {
+    setIsSideNavOpen(!isSideNavOpen);
   };
 
   return (
-    <div className="App">
-      {isAuthenticated && <SideNav />}
-      <div className="bg-slate-600 w-[100%] ">
-        {/* //Header comes here */}
-        {isAuthenticated ? (
-          <div className="todo-container">
-            <TaskInput />
-            <TaskList />
-          </div>
-        ) : (
-          <Login />
-        )}
+    <div className="App flex flex-col">
+      <Header className="w-full" toggleSideNav={toggleSideNav} />
+      <div className="flex flex-1">
+        {isAuthenticated && isSideNavOpen && <SideNav className="fixed" />}
+        <div className="flex-1 flex flex-col">
+          {isAuthenticated ? (
+            <div className="flex flex-1 flex-col todo-container">
+              <TaskInput />
+              <TaskList />
+            </div>
+          ) : (
+            <Login />
+          )}
+        </div>
       </div>
     </div>
   );

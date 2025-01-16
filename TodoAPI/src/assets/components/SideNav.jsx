@@ -27,7 +27,7 @@ export default function SideNav() {
   const importantTasks = tasks.filter((task) => task.important === true);
 
   return (
-    <div className="h-screen w-64 bg-gray-100 flex flex-col justify-center items-center">
+    <div className="h-screen w-64 bg-gray-200 flex flex-col justify-center items-center">
       <div className="items-center w-[90%] rounded-xl  bg-[#f0f6f0] shadow-lg  flex flex-col justify-between">
         {/* User Profile Section */}
         <div className="flex flex-col items-center space-x-4 pb-6 border-b">

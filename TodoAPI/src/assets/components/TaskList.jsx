@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteTask,
-  toggleTaskCompletion,
   fetchWeather,
-  toggleTaskImportance,
 } from "../../features/taskSlice";
+import TaskCard from "./TaskCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -40,100 +38,37 @@ export default function TaskList() {
     );
   };
 
-  const renderPriority = (priority) => {
-    if (priority === "High") {
-      return <i className="fas fa-star text-yellow-500"></i>;
-    }
-    return null;
-  };
-
   return (
-    <div className="h-full mx-auto p-6 bg-gray-50">
+    <div className=" mx-auto bg-gray-200 h-[80vh] w-full">
       {/* Pending Tasks Section */}
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Pending Tasks</h2>
-      {pendingTasks.length === 0 ? (
-        <p className="text-gray-500">No Pending Tasks</p>
-      ) : (
-        <div className="">
-          {pendingTasks.map((task) => (
-            // Task Item
-            <div
-              key={task.id}
-              className="flex items-center justify-between p-4 bg-white border border-gray-200 shadow-sm"
-            >
-              <div className="flex items-center space-x-4">
-                {renderPriority(task.priority)}
-                <span className="text-gray-800 font-medium flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={() =>
-                      dispatch(toggleTaskCompletion({ id: task.id }))
-                    }
-                    className="mr-2 w-5 h-5" // Increased size of the checkbox
-                  />
-                  {task.task}
-                </span>
-                <span className="text-gray-500 text-sm">{task.city}</span>
-                {renderWeather(task.city)}
-              </div>
-              <div className="flex space-x-2 items-center">
-                <FontAwesomeIcon
-                  icon={faStar}
-                  className={`cursor-pointer ${
-                    task.important ? "text-yellow-500" : "text-gray-400"
-                  }`}
-                  onClick={() =>
-                    dispatch(toggleTaskImportance({ id: task.id }))
-                  }
-                />
-                <button onClick={() => dispatch(deleteTask({ id: task.id }))}>
-                  <FontAwesomeIcon icon={faTrash} className="text-red-700" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className=" h-1/2">
+        <h3 className="text-xl font-bold text-gray-800  p-1">Pending Tasks</h3>
+        {pendingTasks.length === 0 ? (
+          <p className="text-gray-500">No Pending Tasks</p>
+        ) : (
+          <div className="h-[80%] p-2 overflow-y-auto">
+            {pendingTasks.map((task) => (
+              <TaskCard key={task.id} task={task} renderWeather={renderWeather} />
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Completed Tasks Section */}
-      <h2 className="text-2xl font-bold text-gray-800 mt-8 mb-4">
-        Completed Tasks
-      </h2>
-      {completedTasks.length === 0 ? (
-        <p className="text-gray-500">No Completed Tasks</p>
-      ) : (
-        <div className="space-y-4">
-          {completedTasks.map((task) => (
-            <div
-              key={task.id}
-              className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm"
-            >
-              <div className="flex items-center space-x-4">
-                {/* Check Mark */}
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() =>
-                    dispatch(toggleTaskCompletion({ id: task.id }))
-                  }
-                  className="mr-2 w-5 h-5" // Increased size of the checkbox
-                />
-                {renderPriority(task.priority)}
-                {/* Task Name */}
-                <span className="line-through text-gray-500 font-medium">
-                  {task.task}
-                </span>
-              </div>
-              <div className="flex space-x-2">
-                <button onClick={() => dispatch(deleteTask({ id: task.id }))}>
-                  <FontAwesomeIcon icon={faTrash} className="text-red-700" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="h-1/2">
+        <h3 className="text-xl font-bold text-gray-800 pl-1">
+          Completed Tasks
+        </h3>
+        {completedTasks.length === 0 ? (
+          <p className="text-gray-500">No Completed Tasks</p>
+        ) : (
+          <div className="h-[80%] p-2 overflow-y-auto">
+            {completedTasks.map((task) => (
+              <TaskCard key={task.id} task={task} renderWeather={renderWeather} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

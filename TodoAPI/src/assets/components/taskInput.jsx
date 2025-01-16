@@ -22,7 +22,7 @@ export default function TaskInput() {
   };
 
   return (
-    <div className="task-input bg-gray-200 p-4  shadow-md w-full">
+    <div className="task-input bg-gradient-to-b from-gray-100 to-green-100 p-4  shadow-md w-full">
       {/* Task Input */}
       <input
         type="text"
