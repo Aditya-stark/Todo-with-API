@@ -61,7 +61,7 @@ const taskSlice = createSlice({
      * Marks the task as important if its priority is high
      */
     addTask(state, action) {
-      const isImportant = action.payload.priority === "high";
+      const isImportant = action.payload.important === true;
       state.tasks.push({ ...action.payload, completed: false, important: isImportant });
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },

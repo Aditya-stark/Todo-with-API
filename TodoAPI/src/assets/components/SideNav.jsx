@@ -24,7 +24,7 @@ export default function SideNav() {
   });
 
   // Filter important tasks
-  const importantTasks = tasks.filter((task) => task.important);
+  const importantTasks = tasks.filter((task) => task.important === true);
 
   return (
     <div className="h-screen w-64 bg-gray-100 flex flex-col justify-center items-center">
@@ -89,7 +89,7 @@ export default function SideNav() {
         <div className="py-6 border-t border-b bg-white w-[90%] rounded-xl flex flex-col items-center space-y-2">
           <h3 className="text-lg font-bold text-gray-900">Today's Tasks</h3>
           <div className="mt-2 text-3xl font-bold text-blue-600">
-            {todaysTasks.length}
+            {todaysTasks.length - tasks.filter((task) => task.completed).length}
           </div>
           <p className="text-sm text-gray-600">tasks remaining</p>
         </div>

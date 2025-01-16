@@ -7,6 +7,11 @@ const store = configureStore({
     task: taskReducer,
     auth: authReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false, // Disable immutable state invariant middleware
+      serializableCheck: false, // Optionally disable serializable state invariant middleware
+    }),
 });
 
 export default store;
