@@ -1,7 +1,7 @@
 /**
  * Redux Toolkit slice for managing tasks and weather data
  * This slice handles:
- * - Task management (add, delete, toggle completion)
+ * - Task management (add, delete, toggle completion, update priority)
  * - Weather data fetching and storage
  * - Local storage persistence
  */
@@ -20,7 +20,6 @@ const loadTasksFromStorage = () => {
   const savedTasks = localStorage.getItem("tasks");
   return savedTasks ? JSON.parse(savedTasks) : [];
 };
-
 
 /**
  * Async thunk for fetching weather data
@@ -59,6 +58,7 @@ const taskSlice = createSlice({
   reducers: {
     /**
      * Adds a new task to the state and updates localStorage
+     * Marks the task as important if its priority is high
      */
     addTask(state, action) {
       const isImportant = action.payload.priority === "high";
