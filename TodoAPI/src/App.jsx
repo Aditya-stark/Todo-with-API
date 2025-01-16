@@ -21,21 +21,13 @@ function TodoApp() {
   return (
     <div className="App">
       {isAuthenticated && <SideNav />}
-      <div className={`main-content ${isAuthenticated ? "with-sidebar" : ""}`}>
-        <header>
-          <h1>Todo App</h1>
-          {isAuthenticated && (
-            <div className="user-info">
-              <span>Welcome, {user?.username}</span>
-              <button onClick={handleLogout}>Logout</button>
-            </div>
-          )}
-        </header>
+      <div className="bg-slate-600 w-[100%] ">
+        {/* //Header comes here */}
         {isAuthenticated ? (
-          <>
+          <div className="todo-container">
             <TaskInput />
             <TaskList />
-          </>
+          </div>
         ) : (
           <Login />
         )}

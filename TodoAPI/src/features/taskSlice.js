@@ -92,6 +92,16 @@ const taskSlice = createSlice({
         localStorage.setItem("tasks", JSON.stringify(state.tasks));
       }
     },
+    /**
+     * Toggles the importance of a task and updates localStorage
+     */
+    toggleTaskImportance(state, action) {
+      const task = state.tasks.find((task) => task.id === action.payload.id);
+      if (task) {
+        task.important = !task.important;
+        localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      }
+    },
   },
   /**
    * Extra reducers for handling async weather API calls
@@ -112,5 +122,5 @@ const taskSlice = createSlice({
   },
 });
 
-export const { addTask, deleteTask, toggleTaskCompletion, updateTaskPriority } = taskSlice.actions;
+export const { addTask, deleteTask, toggleTaskCompletion, updateTaskPriority, toggleTaskImportance } = taskSlice.actions;
 export default taskSlice.reducer;
