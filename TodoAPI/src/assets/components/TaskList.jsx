@@ -6,11 +6,6 @@ import {
 import TaskCard from "./TaskCard";
 
 
-/**
- * TaskList component styled with Tailwind CSS.
- * The functionality is preserved as per the original version.
- */
-
 export default function TaskList() {
   const tasks = useSelector((state) => state.task.tasks);
   const weather = useSelector((state) => state.task.weather);
