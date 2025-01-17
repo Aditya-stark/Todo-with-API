@@ -6,7 +6,7 @@ if (!API_KEY) {
   console.error('Weather API key is missing! Check your .env file');
 }
 
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const BASE_URL = 'http://api.openweathermap.org/data/v1';
 
 export const getWeather = async (city) => {
   if (!API_KEY) {
