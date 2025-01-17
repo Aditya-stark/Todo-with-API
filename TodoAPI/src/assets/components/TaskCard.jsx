@@ -8,7 +8,7 @@ import {
   toggleTaskImportance,
 } from "../../features/taskSlice";
 
-export default function TaskCard({ task, renderWeather }) {
+export default function TaskCard({ task, renderWeather = () => null }) {
   const dispatch = useDispatch();
 
   return (

@@ -9,4 +9,7 @@ export default defineConfig({
       overlay: false, // Disable HMR overlay if causing issues
     },
   },
+  define: {
+    'process.env': {}
+  }
 });

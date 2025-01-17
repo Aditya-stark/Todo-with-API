@@ -4,8 +4,7 @@ import {
   fetchWeather,
 } from "../../features/taskSlice";
 import TaskCard from "./TaskCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 
 /**
  * TaskList component styled with Tailwind CSS.

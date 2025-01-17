@@ -8,6 +8,8 @@ import {
   faMoon,
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
+// Update the logo import to use the public path
+import logo from "../img/logo.png";
 
 export default function Header({ toggleSideNav }) {
   const [isNightMode, setIsNightMode] = useState(false);
@@ -28,11 +30,11 @@ export default function Header({ toggleSideNav }) {
         {/* Left: Menu Icon */}
         <FontAwesomeIcon
           icon={faBars}
-          className="cursor-pointer hover:text-gray-500"
+          className="cursor-pointer hover:text-gray-500 text-xl p-2"
           onClick={toggleSideNav}
         />
-        {/* <img src={logo} alt="logo" className="h-8" /> */}
-        <p>Logo</p>
+        <img src={logo} alt="logo" className="h-8" />
+        {/* <p>Logo</p> */}
       </div>
 
       {/* Right: Icons */}
