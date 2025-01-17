@@ -10,7 +10,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_KEY = "9eadbafef18e4b34840132841251501";
-const BASE_URL = "http://api.weatherapi.com/v1";
+const BASE_URL = "https://api.weatherapi.com/v1";
 
 /**
  * Loads tasks from localStorage
