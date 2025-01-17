@@ -52,7 +52,7 @@ export default function SideNav() {
           <ul className="space-y-2">
             <li>
               <NavLink
-                to="/tasks"
+                to="/"
                 className={({ isActive }) =>
                   `block p-2 rounded ${
                     isActive

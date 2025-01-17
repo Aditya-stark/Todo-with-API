@@ -30,11 +30,11 @@ function TodoApp() {
         {isSideNavOpen && <SideNav className="fixed" />}
         <div className="flex-1">
           <Routes>
-            <Route path="/tasks" element={<MainTasks />} />
+            <Route path="/" element={<MainTasks />} />
+            <Route path="/tasks" element={<Navigate to="/" replace />} />
             <Route path="/today" element={<TodayTasks />} />
             <Route path="/important" element={<ImportantTasks />} />
             <Route path="/completed" element={<CompletedTasks />} />
-            <Route path="/" element={<Navigate to="/tasks" replace />} />
           </Routes>
         </div>
       </div>
