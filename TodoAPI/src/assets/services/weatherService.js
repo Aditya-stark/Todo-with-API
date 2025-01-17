@@ -7,7 +7,7 @@ if (!API_KEY) {
 }
 
 
-const BASE_URL = 'http://api.openweathermap.org/data/v1';
+const BASE_URL = 'https://api.openweathermap.org/v1';
 
 export const getWeather = async (city) => {
   if (!API_KEY) {

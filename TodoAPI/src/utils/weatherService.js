@@ -1,6 +1,6 @@
 const API_KEY = process.env.REACT_APP_OPENWEATHER_API_KEY;
 
-const BASE_URL = 'http://api.openweathermap.org/data/v1/';
+const BASE_URL = 'https://api.openweathermap.org/v1/';
 
 const cache = new Map();
 const CACHE_DURATION = 30 * 60 * 1000;
